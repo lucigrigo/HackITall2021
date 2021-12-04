@@ -68,7 +68,6 @@ const HomePage: React.FC<Props> = () => {
             
 
         </div>
-       
     );
 }
 
