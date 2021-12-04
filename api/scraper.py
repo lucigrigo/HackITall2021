@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from settings import *
+import re
 
 class LinkedInScraper:
     '''
@@ -9,7 +10,7 @@ class LinkedInScraper:
     '''
     def __init__(self, site_url : str):
         self.site_url = site_url
-    
+
     def scrape_candidates(self, job_title : str, skills : list, location : str):
         options = Options()
         options.headless = True
@@ -47,12 +48,17 @@ class HipoScraper:
     def scrape_jobs(self, job_title : str, skills : list, location : str):
         options = Options()
         options.headless = True
+        driver = webdriver.Chrome(options=options, executable_path=CHROME_DRIVER_PATH)
 
         search_url = self.site_url
+
+        # Location
         if location:
             search_url += '/' + location + '/'
         else:
             search_url += '/Toate-Orasele/'
+
+        # Job Title
         if job_title:
             words = job_title.split(' ')
             for idx, w in enumerate(words):
@@ -61,24 +67,34 @@ class HipoScraper:
                     search_url += '-'
             if skills:
                 search_url += '-'
+
+        # Skills
         for idx, skill in enumerate(skills):
             search_url += str(skill)
             if idx != len(skills) - 1:
                 search_url += '-'
 
-        # /html/body/div[1]/div[1]/div[2]/div/table/tbody/tr[1]/td[1]/a
-        # /html/body/div[1]/div[1]/div[2]/div/table/tbody/tr[2]/td[1]/a
-        # /html/body/div[1]/div[1]/div[2]/div/table/tbody/tr[9]/td[1]/a
-
-        driver = webdriver.Chrome(options=options, executable_path=CHROME_DRIVER_PATH)
+        # Get last page
         driver.get(search_url)
-        results = driver.find_elements_by_xpath("/html/body/div[2]/div[1]/div[2]/div/table/tbody/tr")
+        r = driver.find_element_by_class_name("page-last")
+        last_page_url = r.get_attribute("href")
+        last_page = int(re.findall(r'\d+', last_page_url)[-1])
+
+        count = 0
         jobs = {}
-        for r in results:
-            elem = r.find_element(By.XPATH, "//td[1]/a")
-            title = elem.get_attribute('title')
-            link = elem.get_attribute('href')
-            jobs[title] = link
+        for i in range(last_page):
+            driver.get(search_url + f"/{i + 1}")
+            ret_jobs = driver.find_elements_by_class_name("job-title")
+            companies = driver.find_elements_by_class_name("cell-company")
+            for i, job in enumerate(ret_jobs):
+                company_name = companies[i].find_element_by_tag_name("span").text
+                title = job.get_attribute('title')
+                link = job.get_attribute('href')
+                jobs[(title, company_name)] = link
+                count += 1
+                if count == MAX_JOBS:
+                    driver.quit()
+                    return jobs
         driver.quit()
         return jobs
 

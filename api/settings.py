@@ -1,4 +1,4 @@
-CHROME_DRIVER_PATH = '/usr/local/bin/chromedriver'
+CHROME_DRIVER_PATH = '/usr/bin/chromedriver'
 
 INSTALLED_APPS = [
     'rest_framework',
@@ -16,3 +16,5 @@ SITES = {
     LINKEDIN_NAME:LINKEDIN_URL,
     HIPO_NAME:HIPO_URL
 }
+
+MAX_JOBS = 100
