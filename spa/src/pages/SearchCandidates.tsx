@@ -1,6 +1,5 @@
 import * as React from "react";
 import background from "../img/background.jpg";
-import { ComboBox, ComboBoxChangeEvent } from "@progress/kendo-react-dropdowns";
 import { TagsInput } from "react-tag-input-component";
 import "../csss/SearchCandidates.css";
 
