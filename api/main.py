@@ -1,6 +1,6 @@
 import os
 import sys
-from scraper import ScraperFactory
+from scraper_factory import ScraperFactory
 from settings import SITES
 
 def init_scrapers():
