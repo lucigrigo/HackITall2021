@@ -2,11 +2,13 @@ from settings import *
 from scrapers.ejobs_scraper import EJobsScraper
 from scrapers.hipo_scraper import HipoScraper
 from scrapers.linkedin_scraper import LinkedInScraper
-    
+from scrapers.bestjobs_scraper import BestJobsScraper
+
 KNOWN_PLATFORMS = {
     LINKEDIN_NAME:LinkedInScraper,
     HIPO_NAME:HipoScraper,
-    EJOBS_NAME:EJobsScraper
+    EJOBS_NAME:EJobsScraper,
+    BESTJOBS_NAME:BestJobsScraper
 }
 
 class ScraperFactory:

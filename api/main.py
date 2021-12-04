@@ -11,8 +11,8 @@ if __name__ == "__main__":
 
     for platform, scraper in scrapers.items():
         print(f'---   ---\nScraping platform {platform}')
-        jobs = scraper.scrape_jobs('software engineer', 'C', 'Bucharest')
-        candidates = scraper.scrape_candidates('software engineer', 'C', 'Bucharest')
+        jobs = scraper.scrape_jobs('software engineer', ['Java'], 'Bucuresti')
+        candidates = scraper.scrape_candidates('software engineer', ['Java'], 'Bucuresti')
         print(f'Jobs = {jobs}\nCandidates = {candidates}\n---   ---\n')
 
     # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
