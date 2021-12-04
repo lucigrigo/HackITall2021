@@ -1,0 +1,14 @@
+.ctr {
+    text-align: center;
+}
+
+.container {
+    margin: 2% auto;
+    width: 20%;
+    height: 12%;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+}
