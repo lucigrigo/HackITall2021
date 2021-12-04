@@ -11,19 +11,9 @@ function App() {
       <Router basename={process.env.PUBLIC_URL}>
         <div>
           <Routes>
-
-            <Route path="/">
-                <HomePage />
-            </Route>
-
-            <Route path="/search-candidates">
-              <SearchCandidates />
-            </Route>
-
-            <Route path="/search-jobs">
-                <SearchJobs />
-            </Route>
-
+            <Route path="/" element={<HomePage />} />
+            <Route path="/search-candidates" element={<SearchCandidates />} />
+            <Route path="/search-jobs" element={<SearchJobs />} />
           </Routes>
         </div>
       </Router>
