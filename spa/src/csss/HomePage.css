@@ -1,14 +1,107 @@
-.ctr {
+.cntr {
     text-align: center;
 }
 
+.page {
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
-    margin: 2% auto;
+    margin: 30px auto;
     width: 20%;
-    height: 12%;
+    height: 8%;
 }
 
 .logo {
     width: 100%;
     height: auto;
+}
+
+.mrgn1 {
+    margin-top: 10px;
+}
+
+.qstn {
+    font-size: 18px;
+}
+
+.sep {
+    width: 26px;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    flex-direction: column;
+}
+
+.or_sep {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 700;
+    font-style: italic;
+    color: #123350;
+}
+
+.line_sep {
+    height: 300px;
+    width: 2px;
+    margin: 0 10px;
+    background-color: #123350;
+}
+
+.panel_container {
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.select_panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding-left: 63px;
+    padding-right: 50px;
+}
+
+.box_title {
+    width: 80%;
+    text-align: center;
+}
+
+.box_descr {
+    margin-top: 25px;
+    font-size: 20px;
+    width: 85%;
+    text-align: center;
+}
+
+.box_button {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.button_style {
+    height: 40px;
+    min-width: 100px;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0 30px;
+    border-radius: 20px;
+    border: 1px solid;
+    outline: 0;
+    background-color: #123350;
+    color: #ffffff ;
+    cursor: pointer;
+}
+
+.button_style:hover {
+    opacity: 0.7;
 }
