@@ -1,4 +1,4 @@
-CHROME_DRIVER_PATH = '/usr/local/bin/chromedriver'
+CHROME_DRIVER_PATH = '/usr/bin/chromedriver'
 
 INSTALLED_APPS = [
     'rest_framework',
@@ -21,3 +21,5 @@ SITES = {
 }
 
 MAX_JOBS = 100
+MAX_LINKED_IN_PAGES = 3
+VALID_LINKEDIN_PROFILE_URL = "https://www.linkedin.com/in/"
