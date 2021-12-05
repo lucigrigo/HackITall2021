@@ -123,7 +123,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
           <TableCell
             key={headCell.id}
             align='left'
-            // padding='normal'
             border-spacing='30px'
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -158,7 +157,7 @@ export default function EnhancedTable(props: ITableProps) {
 
   const rows: Data[] = [];
 
-  for (const e: IEntry in props.data) {
+  for (const e of props.entries.data) {
     rows.push(createData(e.job_title, e.company_name, e.url));
   }
 

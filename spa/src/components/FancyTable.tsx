@@ -148,7 +148,7 @@ export default function EnhancedTable(props: ITableProps) {
 
   const rows: Data[] = [];
 
-  for (const e:IEntry in props.entries.data) {
+  for (const e of props.entries.data) {
     rows.push(createData(e.name, e.url));
   }
 

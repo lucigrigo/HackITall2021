@@ -30,7 +30,7 @@ const SearchCandidates: React.FC<Props> = () => {
     const [skills, setSkills] = React.useState(lst);
     const [location, setLocation] = React.useState("");
     const [r, setR] = React.useState(false);
-    let d: IData;
+    let d! : IData;
     const [entries, setEntries] = React.useState(d);
 
     const searchCandidates = () => {

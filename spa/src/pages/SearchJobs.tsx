@@ -5,6 +5,7 @@ import FancyTableJobs from "../components/FancyTableJobs";
 import "../csss/SearchJobs.css";
 import logo from '../img/logo_softlink.png';
 import axios, {AxiosResponse} from "axios";
+import qs from 'qs';
 
 interface Props {
 }
@@ -26,28 +27,25 @@ const SearchJobs: React.FC<Props> = () => {
         navigate(path);
     }
 
-    const jobTitles = [
-        "Software engineer",
-        "DevOps",
-        "Software developer",
-        "Site reliability engineer",
-        "Business analyst",
-    ];
-
     const [jobTitle, setJobTitle] = React.useState("");
     let lst:string[] = [];
     const [skills, setSkills] = React.useState(lst);
     const [location, setLocation] = React.useState("");
     const [r, setR] = React.useState(false);
+    let d! : IData;
     const [entries, setEntries] = React.useState(d);
-
+    
     const searchJobs = () => {
         axios.get("/api/search-jobs", {
             params: {
                 job_title: jobTitle,
-                skills_list: skills,
+                skills: skills,
                 location: location,
-            }})
+            },
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }    
+        })
             .then((res: AxiosResponse<IData>) => {
                 setEntries(res.data);
                 setR(true);})
