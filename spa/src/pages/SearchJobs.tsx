@@ -4,8 +4,19 @@ import { useNavigate } from "react-router-dom";
 import FancyTableJobs from "../components/FancyTableJobs";
 import "../csss/SearchJobs.css";
 import logo from '../img/logo_softlink.png';
+import axios, {AxiosResponse} from "axios";
 
 interface Props {
+}
+
+interface IEntry {
+    job_title: string;
+    company_name: string;
+    url: string;
+}
+
+interface IData {
+    data: IEntry[];
 }
 
 const SearchJobs: React.FC<Props> = () => {
@@ -28,11 +39,20 @@ const SearchJobs: React.FC<Props> = () => {
     const [skills, setSkills] = React.useState(lst);
     const [location, setLocation] = React.useState("");
     const [r, setR] = React.useState(false);
+    const [entries, setEntries] = React.useState(d);
 
     const searchJobs = () => {
-        // Request la API
-        setR(true);
-    }
+        axios.get("/api/search-jobs", {
+            params: {
+                job_title: jobTitle,
+                skills_list: skills,
+                location: location,
+            }})
+            .then((res: AxiosResponse<IData>) => {
+                setEntries(res.data);
+                setR(true);})
+            .catch((err) => console.log(err));
+    };
 
     const onChangeJobTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         setJobTitle(event.target.value);
@@ -81,7 +101,7 @@ const SearchJobs: React.FC<Props> = () => {
             </div>
             { r &&
                 <div className="divStyleTable">
-                    <FancyTableJobs></FancyTableJobs>
+                    <FancyTableJobs entries={entries}/>
                 </div>
             }
         </div>

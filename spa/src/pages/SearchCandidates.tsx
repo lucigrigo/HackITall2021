@@ -4,8 +4,18 @@ import { useNavigate } from "react-router-dom";
 import FancyTable from "../components/FancyTable";
 import "../csss/SearchCandidates.css";
 import logo from '../img/logo_softlink.png';
+import axios, {AxiosResponse} from "axios";
 
 interface Props {
+}
+
+interface IEntry {
+    name: string;
+    url: string;
+}
+
+interface IData {
+    data: IEntry[];
 }
 
 const SearchCandidates: React.FC<Props> = () => {
@@ -15,24 +25,26 @@ const SearchCandidates: React.FC<Props> = () => {
         navigate(path);
     }
 
-    const jobTitles = [
-        "Software engineer",
-        "DevOps",
-        "Software developer",
-        "Site reliability engineer",
-        "Business analyst",
-    ];
-
     const [jobTitle, setJobTitle] = React.useState("");
     let lst:string[] = [];
     const [skills, setSkills] = React.useState(lst);
     const [location, setLocation] = React.useState("");
     const [r, setR] = React.useState(false);
+    let d: IData;
+    const [entries, setEntries] = React.useState(d);
 
     const searchCandidates = () => {
-        // Request la API
-        setR(true);
-    }
+        axios.get("/api/search-candidates", {
+            params: {
+                job_title: jobTitle,
+                skills_list: skills,
+                location: location,
+            }})
+            .then((res: AxiosResponse<IData>) => {
+                setEntries(res.data);
+                setR(true);})
+            .catch((err) => console.log(err));
+    };
 
     const onChangeJobTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         setJobTitle(event.target.value);
@@ -81,7 +93,7 @@ const SearchCandidates: React.FC<Props> = () => {
             </div>
             { r &&
                 <div className="divStyleTable">
-                    <FancyTable></FancyTable>
+                    <FancyTable entries={entries}/>
                 </div>
             }
         </div>
