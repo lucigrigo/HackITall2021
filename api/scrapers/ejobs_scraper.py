@@ -43,7 +43,6 @@ class EJobsScraper:
             crt_job_link = job_card.find_element(By.CLASS_NAME, 'JCContentMiddle__Title').find_element(By.TAG_NAME, 'a').get_attribute('href')
             job = {}
             if any(word in crt_job_title for word in words): 
-                print(crt_job_title)
                 job["job_title"] = crt_job_title
                 job["company_name"] = crt_company
                 job["url"] = crt_job_link
