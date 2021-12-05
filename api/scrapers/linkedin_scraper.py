@@ -53,6 +53,8 @@ class LinkedInScraper:
 
         candidates = {}
         for i in range(MAX_LINKED_IN_PAGES):
+            if len(candidates) == MAX_CANDIDATES:
+                break
             driver.get(search_url + f"&page={i + 1}")
             results = driver.find_elements(By.CLASS_NAME, "entity-result__title-line")
             for r in results:
