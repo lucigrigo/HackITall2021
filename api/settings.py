@@ -1,17 +1,4 @@
-CHROME_DRIVER_PATH = '/usr/local/bin/chromedriver'
-
-INSTALLED_APPS = [
-    'rest_framework',
-    'django.core.management',
-    'django.db',
-    'selenium'
-]
-
-DEBUG = True
-
-MIGRATION_MODELS = {}
-
-ALLOWED_HOSTS = []
+CHROME_DRIVER_PATH = '/usr/bin/chromedriver'
 
 LINKEDIN_URL = 'https://www.linkedin.com/search/results/people'
 LINKEDIN_NAME = 'LinkedIn'
@@ -30,3 +17,5 @@ SITES = {
 }
 
 MAX_JOBS = 30
+MAX_LINKED_IN_PAGES = 3
+VALID_LINKEDIN_PROFILE_URL = "https://www.linkedin.com/in/"
