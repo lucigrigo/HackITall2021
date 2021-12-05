@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
+djangorestframework = "*"
+selenium = "*"
+django-contrib-comments = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

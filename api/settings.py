@@ -1,18 +1,5 @@
 CHROME_DRIVER_PATH = '/usr/bin/chromedriver'
 
-INSTALLED_APPS = [
-    'rest_framework',
-    'django.core.management',
-    'django.db',
-    'selenium'
-]
-
-DEBUG = True
-
-MIGRATION_MODELS = {}
-
-ALLOWED_HOSTS = []
-
 LINKEDIN_URL = 'https://www.linkedin.com/search/results/people'
 LINKEDIN_NAME = 'LinkedIn'
 HIPO_URL = 'https://www.hipo.ro/locuri-de-munca/cautajob/Toate-Domeniile'
