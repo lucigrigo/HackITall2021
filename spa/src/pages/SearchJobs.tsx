@@ -16,10 +16,6 @@ interface IEntry {
     url: string;
 }
 
-interface IData {
-    data: IEntry[];
-}
-
 const SearchJobs: React.FC<Props> = () => {
     const navigate = useNavigate();
     const redirectHome = () => {
@@ -32,11 +28,11 @@ const SearchJobs: React.FC<Props> = () => {
     const [skills, setSkills] = React.useState(lst);
     const [location, setLocation] = React.useState("");
     const [r, setR] = React.useState(false);
-    let d! : IData;
+    let d: IEntry[] = [];
     const [entries, setEntries] = React.useState(d);
     
     const searchJobs = () => {
-        axios.get("/api/search-jobs", {
+        axios.get("/api/jobs", {
             params: {
                 job_title: jobTitle,
                 skills: skills,
@@ -46,8 +42,13 @@ const SearchJobs: React.FC<Props> = () => {
                 return qs.stringify(params)
             }    
         })
-            .then((res: AxiosResponse<IData>) => {
-                setEntries(res.data);
+            .then((res: AxiosResponse) => {
+                let jobs: IEntry[] = []
+                for (const arr: IEntry[] in res.data) {
+                    jobs = jobs.concat(arr)
+                }
+                setEntries(jobs);
+                console.log(res);
                 setR(true);})
             .catch((err) => console.log(err));
     };

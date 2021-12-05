@@ -21,10 +21,6 @@ interface IEntry {
   url: string;
 }
 
-interface IData {
-  data: IEntry[];
-}
-
 function createData(
   name: string,
   url: string,
@@ -137,7 +133,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 interface ITableProps {
-  entries: IData;
+  entries: IEntry[];
 }
 
 export default function EnhancedTable(props: ITableProps) {
@@ -148,7 +144,7 @@ export default function EnhancedTable(props: ITableProps) {
 
   const rows: Data[] = [];
 
-  for (const e of props.entries.data) {
+  for (const e of props.entries) {
     rows.push(createData(e.name, e.url));
   }
 
@@ -196,7 +192,7 @@ export default function EnhancedTable(props: ITableProps) {
                       key={row.name}
                     >
                       <TableCell style = {{ width:'50%'}} align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.url}</TableCell>
+                      <TableCell align="left"><a href={String(row.url)}>See profile</a></TableCell>
                     </TableRow>
                   );
                 })}

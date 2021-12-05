@@ -1,4 +1,4 @@
-CHROME_DRIVER_PATH = '/usr/local/bin/chromedriver'
+CHROME_DRIVER_PATH = '/usr/bin/chromedriver'
 
 LINKEDIN_URL = 'https://www.linkedin.com/search/results/people'
 LINKEDIN_NAME = 'LinkedIn'

@@ -5,6 +5,7 @@ import FancyTable from "../components/FancyTable";
 import "../csss/SearchCandidates.css";
 import logo from '../img/logo_softlink.png';
 import axios, {AxiosResponse} from "axios";
+import qs from "qs";
 
 interface Props {
 }
@@ -12,10 +13,6 @@ interface Props {
 interface IEntry {
     name: string;
     url: string;
-}
-
-interface IData {
-    data: IEntry[];
 }
 
 const SearchCandidates: React.FC<Props> = () => {
@@ -26,22 +23,27 @@ const SearchCandidates: React.FC<Props> = () => {
     }
 
     const [jobTitle, setJobTitle] = React.useState("");
-    let lst:string[] = [];
+    let lst: string[] = [];
     const [skills, setSkills] = React.useState(lst);
     const [location, setLocation] = React.useState("");
     const [r, setR] = React.useState(false);
-    let d! : IData;
+    let d: IEntry[] = [];
     const [entries, setEntries] = React.useState(d);
 
     const searchCandidates = () => {
-        axios.get("/api/search-candidates", {
+        axios.get("/api/candidates", {
             params: {
                 job_title: jobTitle,
                 skills_list: skills,
                 location: location,
-            }})
-            .then((res: AxiosResponse<IData>) => {
-                setEntries(res.data);
+            },
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+        })
+            .then((res: AxiosResponse) => {
+                setEntries(res.data[0]);
+                console.log(res);
                 setR(true);})
             .catch((err) => console.log(err));
     };

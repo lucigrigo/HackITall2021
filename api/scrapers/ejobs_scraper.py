@@ -31,7 +31,7 @@ class EJobsScraper:
                 if idx != len(skills) - 1:
                     search_url += '-'
 
-        jobs = {}
+        jobs = []
         driver.get(search_url)
         job_cards = driver.find_elements(By.CLASS_NAME, 'JobCard')
         for idx, job_card in enumerate(job_cards):
@@ -40,7 +40,11 @@ class EJobsScraper:
             crt_company = job_card.find_element(By.CLASS_NAME, "JCContentMiddle").find_element(By.TAG_NAME, 'h3').find_element(By.TAG_NAME, 'a').text
             crt_job_title = job_card.find_element(By.CLASS_NAME, 'JCContentMiddle__Title').find_element(By.TAG_NAME, 'span').text
             crt_job_link = job_card.find_element(By.CLASS_NAME, 'JCContentMiddle__Title').find_element(By.TAG_NAME, 'a').get_attribute('href')
-            jobs[(crt_job_title, crt_company)] = crt_job_link
+            job = {}
+            job["job_title"] = crt_job_title
+            job["company_name"] = crt_company
+            job["url"] = crt_job_link
+            jobs.append(job)
         driver.quit()
 
         return jobs

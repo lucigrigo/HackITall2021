@@ -2,7 +2,7 @@
   "name": "softlink",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@emotion/cache": "^11.6.0",
     "@emotion/react": "^11.7.0",

@@ -32,7 +32,7 @@ class BestJobsScraper:
             search_url += '&location=' + location
         search_url += '&sort=relevant'
 
-        jobs = {}
+        jobs = []
         driver.get(search_url)
         job_cards = driver.find_elements(By.XPATH, "//*[@id=\"app-main-content\"]/div/div/div")
         for idx, job_card in enumerate(job_cards):
@@ -47,7 +47,11 @@ class BestJobsScraper:
             crt_job_link = job_card.find_element(By.TAG_NAME, 'a').get_attribute('href')
             if not crt_job_link:
                 break
-            jobs[(crt_job_title, crt_company)] = crt_job_link
+            job = {}
+            job["job_title"] = crt_job_title
+            job["company_name"] = crt_company
+            job["url"] = crt_job_link
+            jobs.append(job)
 
         return jobs
 

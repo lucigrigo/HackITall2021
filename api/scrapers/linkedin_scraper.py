@@ -51,7 +51,7 @@ class LinkedInScraper:
         if location:
             search_url += str(location)
 
-        candidates = {}
+        candidates = []
         for i in range(MAX_LINKED_IN_PAGES):
             if len(candidates) == MAX_CANDIDATES:
                 break
@@ -61,8 +61,10 @@ class LinkedInScraper:
                 profile = r.find_element(By.CLASS_NAME, "app-aware-link")
                 profile_url = profile.get_attribute('href')
                 if profile_url.startswith(VALID_LINKEDIN_PROFILE_URL):
-                    name = r.find_elements(By.CLASS_NAME, "visually-hidden")[0].text[5:-10]
-                    candidates[name] = profile_url
+                    candidate = {}
+                    candidate["name"] = r.find_elements(By.CLASS_NAME, "visually-hidden")[0].text[5:-10]
+                    candidate["url"] = profile_url
+                    candidates.append(candidate)
         driver.quit()
         return candidates
 

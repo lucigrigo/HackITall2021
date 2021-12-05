@@ -24,10 +24,6 @@ interface IEntry {
   url: string;
 }
 
-interface IData {
-  data: IEntry[];
-}
-
 function createData(
     job_title: string,
     company_name: string,
@@ -146,7 +142,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 interface ITableProps {
-  entries: IData;
+  entries: IEntry[];
 }
 
 export default function EnhancedTable(props: ITableProps) {
@@ -157,7 +153,7 @@ export default function EnhancedTable(props: ITableProps) {
 
   const rows: Data[] = [];
 
-  for (const e of props.entries.data) {
+  for (const e of props.entries) {
     rows.push(createData(e.job_title, e.company_name, e.url));
   }
 
@@ -206,7 +202,7 @@ export default function EnhancedTable(props: ITableProps) {
                     >
                       <TableCell style = {{ width:'33%'}} align="left">{row.job_title}</TableCell>
                       <TableCell style = {{ width:'33%'}} align="left">{row.company_name}</TableCell>
-                      <TableCell align="left">{row.url}</TableCell>
+                      <TableCell align="left"><a href={String(row.url)}>See Job Posting</a></TableCell>
                     </TableRow>
                   );
                 })}

@@ -44,7 +44,7 @@ class HipoScraper:
         last_page = int(re.findall(r'\d+', last_page_url)[-1])
 
         count = 0
-        jobs = {}
+        jobs = []
         for i in range(last_page):
             driver.get(search_url + f"/{i + 1}")
             ret_jobs = driver.find_elements(By.CLASS_NAME, "job-title")
@@ -53,7 +53,11 @@ class HipoScraper:
                 company_name = companies[i].find_element(By.TAG_NAME, "span").text
                 title = job.get_attribute('title')
                 link = job.get_attribute('href')
-                jobs[(title, company_name)] = link
+                job = {}
+                job["job_title"] = title
+                job["company_name"] = company_name
+                job["url"] = link
+                jobs.append(job)
                 count += 1
                 if count == MAX_JOBS:
                     driver.quit()
