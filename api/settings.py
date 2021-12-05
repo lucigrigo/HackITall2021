@@ -1,4 +1,4 @@
-CHROME_DRIVER_PATH = '/usr/bin/chromedriver'
+CHROME_DRIVER_PATH = '/usr/local/bin/chromedriver'
 
 LINKEDIN_URL = 'https://www.linkedin.com/search/results/people'
 LINKEDIN_NAME = 'LinkedIn'
@@ -17,5 +17,6 @@ SITES = {
 }
 
 MAX_JOBS = 30
-MAX_LINKED_IN_PAGES = 3
+MAX_LINKED_IN_PAGES = 10
+MAX_CANDIDATES = 100
 VALID_LINKEDIN_PROFILE_URL = "https://www.linkedin.com/in/"
