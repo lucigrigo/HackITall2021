@@ -61,6 +61,9 @@ const SearchCandidates: React.FC<Props> = () => {
             <div className="container cntr">
                 <img className="logo" src={logo} alt="Logo" onClick={redirectHome}/>
             </div>
+            <div className="page_title">
+                Search Candidates
+            </div>
             <div className="divStyle">
                 <div className="margin_box">
                     <div className="titles">

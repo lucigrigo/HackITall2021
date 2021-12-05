@@ -14,6 +14,7 @@ class BestJobsScraper:
         driver = webdriver.Chrome(options=options, executable_path=CHROME_DRIVER_PATH)
         
         search_url = self.site_url
+        words=[]
         if job_title:
             search_url += '?keyword='
             words = job_title.split(' ')
@@ -48,10 +49,11 @@ class BestJobsScraper:
             if not crt_job_link:
                 break
             job = {}
-            job["job_title"] = crt_job_title
-            job["company_name"] = crt_company
-            job["url"] = crt_job_link
-            jobs.append(job)
+            if any(word in crt_job_title for word in words):
+                job["job_title"] = crt_job_title
+                job["company_name"] = crt_company
+                job["url"] = crt_job_link
+                jobs.append(job)
 
         return jobs
 

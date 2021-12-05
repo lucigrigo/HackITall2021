@@ -86,3 +86,9 @@ body {
     line-height: 1.4;
     padding: var(--rti-s);
 }
+
+.page_title {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+}

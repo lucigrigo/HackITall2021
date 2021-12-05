@@ -44,7 +44,7 @@ const SearchJobs: React.FC<Props> = () => {
         })
             .then((res: AxiosResponse) => {
                 let jobs: IEntry[] = []
-                for (const arr: IEntry[] in res.data) {
+                for (const arr of res.data) {
                     jobs = jobs.concat(arr)
                 }
                 setEntries(jobs);
@@ -65,6 +65,9 @@ const SearchJobs: React.FC<Props> = () => {
         <div >
             <div className="container cntr">
                 <img className="logo" src={logo} alt="Logo" onClick={redirectHome} />
+            </div>
+            <div className="page_title">
+                Search Jobs
             </div>
             <div className="divStyle">
                 <div className="margin_box">

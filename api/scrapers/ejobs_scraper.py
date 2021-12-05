@@ -16,6 +16,7 @@ class EJobsScraper:
         if location:
             search_url += location + '/'
         
+        words = []
         if job_title:
             words = job_title.split(' ')
             for idx, word in enumerate(words):
@@ -41,10 +42,12 @@ class EJobsScraper:
             crt_job_title = job_card.find_element(By.CLASS_NAME, 'JCContentMiddle__Title').find_element(By.TAG_NAME, 'span').text
             crt_job_link = job_card.find_element(By.CLASS_NAME, 'JCContentMiddle__Title').find_element(By.TAG_NAME, 'a').get_attribute('href')
             job = {}
-            job["job_title"] = crt_job_title
-            job["company_name"] = crt_company
-            job["url"] = crt_job_link
-            jobs.append(job)
+            if any(word in crt_job_title for word in words): 
+                print(crt_job_title)
+                job["job_title"] = crt_job_title
+                job["company_name"] = crt_company
+                job["url"] = crt_job_link
+                jobs.append(job)
         driver.quit()
 
         return jobs

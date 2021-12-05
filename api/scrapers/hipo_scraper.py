@@ -22,6 +22,7 @@ class HipoScraper:
             search_url += '/Toate-Orasele/'
 
         # Job Title
+        words=[]
         if job_title:
             words = job_title.split(' ')
             for idx, w in enumerate(words):
@@ -39,9 +40,12 @@ class HipoScraper:
 
         # Get last page
         driver.get(search_url)
-        r = driver.find_element(By.CLASS_NAME, "page-last")
-        last_page_url = r.get_attribute("href")
-        last_page = int(re.findall(r'\d+', last_page_url)[-1])
+        try:
+            r = driver.find_element(By.CLASS_NAME, "page-last")
+            last_page_url = r.get_attribute("href")
+            last_page = int(re.findall(r'\d+', last_page_url)[-1])
+        except:
+            last_page=1
 
         count = 0
         jobs = []
@@ -54,14 +58,15 @@ class HipoScraper:
                 title = job.get_attribute('title')
                 link = job.get_attribute('href')
                 job = {}
-                job["job_title"] = title
-                job["company_name"] = company_name
-                job["url"] = link
-                jobs.append(job)
-                count += 1
-                if count == MAX_JOBS:
-                    driver.quit()
-                    return jobs
+                if any(word in title for word in words):
+                    job["job_title"] = title
+                    job["company_name"] = company_name
+                    job["url"] = link
+                    jobs.append(job)
+                    count += 1
+                    if count == MAX_JOBS:
+                        driver.quit()
+                        return jobs
         driver.quit()
         return jobs
 
