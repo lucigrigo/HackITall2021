@@ -51,7 +51,7 @@ const HomePage: React.FC<Props> = () => {
                     </div>
                     <div className="box">
                         <div className="box_title">
-                            <h1>I am candidate.</h1>
+                            <h1>I am a candidate.</h1>
                             <h2>I want to find job opportunities.</h2>
                         </div>
                         <div className="box_descr">

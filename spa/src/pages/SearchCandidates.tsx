@@ -1,19 +1,20 @@
 import * as React from "react";
-import background from "../img/background.jpg";
 import { TagsInput } from "react-tag-input-component";
+import { useNavigate } from "react-router-dom";
+import FancyTable from "../components/FancyTable";
 import "../csss/SearchCandidates.css";
+import logo from '../img/logo_softlink.png';
 
 interface Props {
 }
 
-const divStyle = {
-    height: '100%',
-    margin: 0,
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover'
-};
-
 const SearchCandidates: React.FC<Props> = () => {
+    const navigate = useNavigate();
+    const redirectHome = () => {
+        let path= '/';
+        navigate(path);
+    }
+
     const jobTitles = [
         "Software engineer",
         "DevOps",
@@ -23,7 +24,8 @@ const SearchCandidates: React.FC<Props> = () => {
     ];
 
     const [jobTitle, setJobTitle] = React.useState("");
-    const [skills, setSkills] = React.useState(["example"]);
+    let lst:string[] = [];
+    const [skills, setSkills] = React.useState(lst);
     const [location, setLocation] = React.useState("");
     const [r, setR] = React.useState(false);
 
@@ -41,17 +43,24 @@ const SearchCandidates: React.FC<Props> = () => {
 
 
     return (
-        <div style={divStyle}>
-            <div>
-                <div className="col-xs-12 col-sm-7 example-col">
-                    Job Title:
-                    <br />
-                    <input type="tex" onChange={onChangeJobTitle} />
+        <div >
+            <div className="container cntr">
+                <img className="logo" src={logo} alt="Logo" onClick={redirectHome}/>
+            </div>
+            <div className="divStyle">
+                <div className="margin_box">
+                    <div className="titles">
+                        Job title:
+                    </div>
+                    <div className="go309598777">
+                        <input className="go3450369076" type="tex" onChange={onChangeJobTitle} placeholder="Enter job title" />
+                    </div>
                 </div>
                 <br />
-                <div>
-                    Skills:
-                    <br />
+                <div className="margin_box skills_box">
+                    <div className="titles">
+                        Skills:
+                    </div>
                     <TagsInput
                         value={skills}
                         onChange={setSkills}
@@ -60,16 +69,19 @@ const SearchCandidates: React.FC<Props> = () => {
                     />
                 </div>
                 <br />
-                <div>
-                    Location:
-                    <br />
-                    <input type="tex" onChange={onChangeLocation} />
+                <div className="margin_box">
+                    <div className="titles">
+                        Location:
+                    </div>
+                    <div className="go309598777">
+                        <input className="go3450369076" type="tex" onChange={onChangeLocation} placeholder="Enter location" />
+                    </div>
                 </div>
-                <button><img src="../img/search.jpg" onClick={searchCandidates}  alt="search"/></button>
+                <button className="button_img" onClick={searchCandidates}>Search</button>
             </div>
             { r &&
-                <div>
-                    Aici afisam userii
+                <div className="divStyleTable">
+                    <FancyTable></FancyTable>
                 </div>
             }
         </div>
